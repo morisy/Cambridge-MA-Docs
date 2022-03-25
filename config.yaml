@@ -9,7 +9,7 @@ properties:
     type: string
     format: uri
     description: The URL of the site to start scraping
-    default: https://www.ssa.gov/foia/readingroom.html
+    default: https://www.cambridgema.gov/publications?page=1&ResultsPerPage=10&sortBy=releasedate&sortOrder=desc
   project:
     type: number
     description: >-
