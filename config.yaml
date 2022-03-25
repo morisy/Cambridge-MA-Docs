@@ -14,7 +14,7 @@ properties:
     type: number
     description: >-
       The DocumentCloud project ID of the project the documents should be uploaded in to
-    default: 207338
+    default: 207421
   keywords:
     type: array
     items:
