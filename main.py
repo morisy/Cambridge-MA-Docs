@@ -21,6 +21,11 @@ SLACK_WEBHOOK = os.environ.get("SLACK_WEBHOOK")
 DOC_CUTOFF = 10
 MAX_NEW_DOCS = 100
 
+UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+)
+
 
 class Document:
     """Class to hold information about scraped documents"""
@@ -110,8 +115,8 @@ class Scraper(CronAddOn):
         if scheme not in ["http", "https"]:
             return {"content-type": None, "content-disposition": None}
         try:
-            resp = requests_retry_session().head(url, allow_redirects=True)
-        except requests.exceptions.RequestException:
+            resp = requests_retry_session().head(url, allow_redirects=True, headers={"User-Agent": UA}, timeout=10)
+        except requests.exceptions.RequestException as exc:
             return {"content-type": None, "content-disposition": None}
         return {
             "content-type": resp.headers.get("content-type"),
