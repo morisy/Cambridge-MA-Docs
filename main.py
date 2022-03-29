@@ -133,7 +133,7 @@ class Scraper(CronAddOn):
     def scrape(self, site, depth=0):
         """Scrape the site for new documents"""
         print(f"Scraping {site} (depth {depth})")
-        resp = requests_retry_session().get(site)
+        resp = requests_retry_session().get(site, headers={"User-Agent": UA})
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, "html.parser")
         docs = []
