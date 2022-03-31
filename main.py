@@ -76,7 +76,8 @@ class Document:
         """Fixes quoting of characters in file names to use with requests"""
         scheme, netloc, path, qs, anchor = urlparse.urlsplit(self.url)
         path = urlparse.quote(path, "/%")
-        qs = urlparse.quote_plus(qs, ":&=")
+        # % were being double escaped here
+        qs = urlparse.quote_plus(qs, ":&=%")
         return urlparse.urlunsplit((scheme, netloc, path, qs, anchor))
 
 
